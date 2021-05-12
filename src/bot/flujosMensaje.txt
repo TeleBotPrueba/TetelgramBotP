@@ -1,0 +1,79 @@
+import telegramBot from 'node-telegram-bot-api';
+import { user } from './user';
+enum STATUS{
+    NEXT_NAME,
+    NEXT_EMAIL,
+    NEXT_HOBBIE
+}
+
+type MessageDictionary ={
+    [key: string]:{
+        status: STATUS,
+        value: {
+            names?: string,
+            email?: string,
+            hobbie?: string
+        }
+    }
+}
+
+function init(){
+    const bot = new telegramBot(process.env.token as string,{polling:true});
+    const messageDictionary: MessageDictionary={};
+   
+    bot.on("message",(message)=>{
+        if(messageDictionary[message.chat.id]=== undefined){
+            messageDictionary[message.chat.id]={
+                status: STATUS.NEXT_NAME,
+                value: {}
+            }
+            
+            bot.sendMessage(message.chat.id, "Hola cual es tu nombre ?");
+
+        } else if(messageDictionary[message.chat.id].status === STATUS.NEXT_NAME){
+            messageDictionary[message.chat.id]={
+                status: STATUS.NEXT_EMAIL,
+                value:{
+                    ...messageDictionary[message.chat.id].value,
+                    names : message.text
+                }
+            }
+            bot.sendMessage(message.chat.id, `Muy bien ${message.text} ! Proporciona tu correo electronico`);
+        }else if(messageDictionary[message.chat.id].status === STATUS.NEXT_EMAIL){
+            messageDictionary[message.chat.id]={
+                status: STATUS.NEXT_HOBBIE,
+                value:{
+                    ...messageDictionary[message.chat.id].value,
+                    email : message.text
+                }
+            }
+            bot.sendMessage(message.chat.id,"Para finalizar, cual es tu Hobbie ?")
+        }
+        else if(messageDictionary[message.chat.id].status === STATUS.NEXT_HOBBIE){
+            messageDictionary[message.chat.id]={
+                status: STATUS.NEXT_HOBBIE,
+                value:{
+                    ...messageDictionary[message.chat.id].value,
+                    hobbie : message.text
+                }
+            }
+            const  {names,email,hobbie}= messageDictionary[message.chat.id].value;
+            const usuario  = new user(names!, email!, hobbie!);
+            delete messageDictionary[message.chat.id];
+
+            bot.sendMessage(message.chat.id,usuario.createSubscription());
+            
+
+        }
+   
+
+
+
+
+    })
+}
+
+
+const botController={init};
+export default botController;  
+/* bot.sendMessage(message.chat.id,"Hello World!")*/ /*Contesta Hello world */

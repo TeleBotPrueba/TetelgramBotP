@@ -1,0 +1,23 @@
+import telegramBot from 'node-telegram-bot-api';
+import {isAllawed} from './permission'
+
+
+
+
+function init(){
+    const bot = new telegramBot(process.env.token as string,{polling:true});
+
+    bot.on('message',(message)=>{
+        const sender_id = message.chat.id;
+        if(isAllawed(sender_id)){
+            bot.sendMessage(sender_id,"Hello world");
+        } else{
+            bot.sendMessage(sender_id,"No puedo hablar contigo");
+        }
+    })
+
+}
+
+
+const botController={init};
+export default botController;  
