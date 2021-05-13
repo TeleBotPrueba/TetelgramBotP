@@ -10,17 +10,16 @@ function init(){
     } ={};
 
     bot.on('message',(message)=>{
-       bot.sendMessage(message.chat.id,"Hola humano");
         
         const sender_id = message.chat.id;
         
           switch(message.text){
            case 'hola':
-                bot.sendMessage(message.chat.id,`hola ${message.from!.id}`);
+                bot.sendMessage(message.chat.id,"Hola ");
                 break;
             case 'reglas':
-                bot.sendMessage(message.chat.id,"1 No decir malas palabras \n 2 Respetar a los miembros ")
-
+               "1 No decir malas palabras \n2 Respetar a los miembros\n3 No hagas comentarios inapropiados\4 nSé claro\n5Cuando las cosas se pongan delicadas, manéjalas fuera del grupo"
+                break;
         }
         
         
