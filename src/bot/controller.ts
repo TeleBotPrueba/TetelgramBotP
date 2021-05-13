@@ -10,7 +10,7 @@ function init(){
     } ={};
 
     bot.on('message',(message)=>{
-      //  bot.sendMessage(message.chat.id,"Hola humano");
+       bot.sendMessage(message.chat.id,"Hola humano");
         
         const sender_id = message.chat.id;
         
