@@ -18,7 +18,7 @@ function init(){
                 bot.sendMessage(message.chat.id,"Hola");
                 break;
           case "reglas":
-                bot.sendMessage(message.chat.id,"1 No decir malas palabras \n2 Respetar a los miembros\n3 No hagas comentarios inapropiados\n4 Sé claro\n5 Cuando las cosas se pongan delicadas, manéjalas fuera del grupo");
+                bot.sendMessage(message.chat.id,"Reglamento del grupo:\n\n1 No decir malas palabras \n2 Respetar a los miembros\n3 No hagas comentarios inapropiados\n4 Sé claro\n5 Cuando las cosas se pongan delicadas, manéjalas fuera del grupo");
                break;
                   
         }
