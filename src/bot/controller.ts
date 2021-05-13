@@ -15,7 +15,7 @@ function init(){
         
           switch(message.text){
            case 'hola':
-                bot.sendMessage(message.chat.id,"Hola ");
+                bot.sendMessage(sender_id,"Hola");
                 break;
             case 'reglas':
                "1 No decir malas palabras \n2 Respetar a los miembros\n3 No hagas comentarios inapropiados\4 nSé claro\n5Cuando las cosas se pongan delicadas, manéjalas fuera del grupo"
