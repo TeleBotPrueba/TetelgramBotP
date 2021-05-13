@@ -11,7 +11,19 @@ function init(){
 
     bot.on('message',(message)=>{
       //  bot.sendMessage(message.chat.id,"Hola humano");
+        
         const sender_id = message.chat.id;
+        
+          switch(message.text){
+           case 'hola':
+                bot.sendMessage(message.chat.id,`hola ${message.from!.id}`);
+                break;
+            case 'reglas':
+                bot.sendMessage(message.chat.id,"1 No decir malas palabras \n 2 Respetar a los miembros ")
+
+        }
+        
+        
         if(message.text && malasPalabras(message.text)){
           bannedList[message.from!.id] = bannedList[message.from!.id] === undefined ? 1 : bannedList[message.from!.id] + 1;
     
@@ -19,7 +31,7 @@ function init(){
               bot.sendMessage(sender_id,"Lo siento debo sacarlo del grupo!");
               bot.kickChatMember(sender_id,message.from!.id.toString());
           }else{
-              bot.sendMessage(sender_id,`Cuidado con tus palabras, advertencia No. ${bannedList[message.from!.id]}`,{
+              bot.sendMessage(sender_id,`Cuidado con tus palabras tienes tres oportunidades, advertencia No. ${bannedList[message.from!.id]}`,{
               reply_to_message_id: message.message_id
             });
         }
