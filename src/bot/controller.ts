@@ -10,8 +10,8 @@ function init(){
     } ={};
 
     bot.on('message',(message)=>{
-        bot.sendMessage(message.chat.id,"Hola humano");
-       /*  const sender_id = message.chat.id;
+      //  bot.sendMessage(message.chat.id,"Hola humano");
+        const sender_id = message.chat.id;
         if(message.text && malasPalabras(message.text)){
           bannedList[message.from!.id] = bannedList[message.from!.id] === undefined ? 1 : bannedList[message.from!.id] + 1;
     
@@ -23,7 +23,7 @@ function init(){
               reply_to_message_id: message.message_id
             });
         }
-      } */
+      } 
     })
     bot.on("inline_query",(qry)=>{
         const matches: Array<InlineQueryResult> = dictionarySearch(qry.query).map(([word,definition],i)=>{
